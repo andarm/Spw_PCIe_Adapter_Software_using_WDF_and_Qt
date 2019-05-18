@@ -14,7 +14,18 @@ IN  LPGUID InterfaceGuid
 );
 
 HANDLE hDevice = INVALID_HANDLE_VALUE;
-
+/*******************************************
+ * 从原来测试程序中，小修改了一下读写测试。 
+ * 支持参数输出。 
+ * 
+ * 	   读 ：.exe  r [addressID]
+ *     写 ：.exe  w [addressID] [Data]
+ *     注： addressID 实验中的板块地址是4字节对齐 ，即 0 4 8 16 ... N 
+ * 
+ * 
+ * 
+ * 
+ * ************************************************/
 
 int __cdecl main(char argc ,char **argv)
 //int __cdecl main(void)

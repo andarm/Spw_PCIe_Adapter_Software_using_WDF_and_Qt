@@ -1,4 +1,10 @@
 # Spw_PCIe_Adapter_Software_using_WDF_and_Qt
+## [目录](README.md)
+
+- [PCIE QT测试程序](Spw_PCIe_app_Qt)
+- [PCIE PCIE驱动和测试程序](Spw_PCIe_driver_WDF/Spw_PCIe_driver_WDF/)
+
+### 完全是主库内容
 本代码为PCIe接口适配器控制软件，底层驱动使用WDF框架和C语言编写，上层应用程序使用Qt框架和C++语言编写，
 中间通信层使用C语言调用Win32API实现。
 
@@ -18,3 +24,7 @@
 实现中断机制和DMA传输；
 完善代码注释；
 完善README文件。
+
+### 2019年5月18日 
+
+- 本次更新将应用测试程序，个人驱动没有整理更新

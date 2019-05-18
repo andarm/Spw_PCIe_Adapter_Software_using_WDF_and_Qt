@@ -1,6 +1,7 @@
 # app
 Win7Debug/
 Win7Release/
+.vscode/
 
 # Windows image file caches
 Thumbs.db
