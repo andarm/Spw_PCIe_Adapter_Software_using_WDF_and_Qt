@@ -16,10 +16,14 @@ IN  LPGUID InterfaceGuid
 HANDLE hDevice = INVALID_HANDLE_VALUE;
 
 
+//int __cdecl main(char argc ,char **argv)
 int __cdecl main(void)
 {
 	PCHAR  DevicePath;
 	ULONG nOutput;
+	ULONG outBuffer;
+	ULONG inBuffer;
+	ULONG AddressOffset;
 	printf("Application Spw_PCIe starting...\n");
 	//在这里修改GUID
 	DevicePath = GetDevicePath((LPGUID)&GUID_DEVINTERFACE_Spw_PCIe);//这里是不是有问题，把GUID值改一下看是否还能成功？？
@@ -36,12 +40,54 @@ int __cdecl main(void)
 		printf("ERROR opening device: (%0x) returned from CreateFile\n", GetLastError());
 		return 0;
 	}
+#if  0 
+	if(argc>2)
+	{
+
+		//JeanTest 
+		AddressOffset = 0;
+		printf("JeansonTest|address 0\n");
+			if (!DeviceIoControl(hDevice,
+		Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
+		&AddressOffset,
+		sizeof(ULONG),
+		NULL,
+		0,
+		&nOutput,
+		NULL)
+		)
+	{
+		printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
+		printf("error happens! continue? Y/N?\n");
+		while (getchar() != 'Y');
+		//		goto exit;
+		return 0;
+	}
+		if (!DeviceIoControl(hDevice,
+		Spw_PCIe_IOCTL_OUT_BUFFERED,
+		NULL,
+		0,
+		&outBuffer,
+		sizeof(ULONG),
+		&nOutput,
+		NULL)
+		)
+	{
+		printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
+		printf("error happens! continue? Y/N?\n");
+		while (getchar() != 'Y');
+		//		goto exit;
+		return 0;
+	}
+	printf("read data:%d\n", outBuffer);
+	printf("datasize:%d\n", nOutput);
+
+	}
+#endif 
 	printf("continue? Y/N?\n");
 	while (getchar() != 'Y');
 	printf("OK.\n");
-	ULONG outBuffer;
-	ULONG inBuffer;
-	ULONG AddressOffset;
+
 	//------------------read physical address-----------------------
 	printf("continue to operate reading physical address? Y/N?\n");
 	while (getchar() != 'Y');
@@ -69,7 +115,9 @@ int __cdecl main(void)
 	while (getchar() != 'Y');
 	printf("please input address offset\n");
 	printf(">");
-	scanf("%d", &AddressOffset);
+	scanf_s("%d", &AddressOffset); 
+	//JeanTest  
+	// nOutput = 16; 
 	if (!DeviceIoControl(hDevice,
 		Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
 		&AddressOffset,
@@ -111,7 +159,7 @@ int __cdecl main(void)
 
 	printf("please input address offset\n");
 	printf(">");
-	scanf("%d", &AddressOffset);
+	scanf_s("%d", &AddressOffset);
 	if (!DeviceIoControl(hDevice,
 		Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
 		&AddressOffset,
@@ -131,7 +179,8 @@ int __cdecl main(void)
 	printf("OffsetAddress has writen to PCIe\n");
 	printf("input write data:\n");
 	printf(">");
-	scanf("%d", &inBuffer);
+	scanf_s("%d", &inBuffer);
+	
 	if (!DeviceIoControl(hDevice,
 		Spw_PCIe_IOCTL_IN_BUFFERED,
 		&inBuffer,
@@ -156,7 +205,7 @@ int __cdecl main(void)
 	while (getchar() != 'Y');
 	printf("please input address offset\n");
 	printf(">");
-	scanf("%d", &AddressOffset);
+	scanf_s("%d", &AddressOffset);
 	if (!DeviceIoControl(hDevice,
 		Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
 		&AddressOffset,
