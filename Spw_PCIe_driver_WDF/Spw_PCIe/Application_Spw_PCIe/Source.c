@@ -16,8 +16,8 @@ IN  LPGUID InterfaceGuid
 HANDLE hDevice = INVALID_HANDLE_VALUE;
 
 
-//int __cdecl main(char argc ,char **argv)
-int __cdecl main(void)
+int __cdecl main(char argc ,char **argv)
+//int __cdecl main(void)
 {
 	PCHAR  DevicePath;
 	ULONG nOutput;
@@ -40,47 +40,99 @@ int __cdecl main(void)
 		printf("ERROR opening device: (%0x) returned from CreateFile\n", GetLastError());
 		return 0;
 	}
-#if  0 
+#if  1 
 	if(argc>2)
 	{
-
+		
 		//JeanTest 
-		AddressOffset = 0;
-		printf("JeansonTest|address 0\n");
+		switch (*argv[1])
+		{
+		case 'r':
+			printf("JeansonTest|address 0|argv:%s\n", argv[2]);
+			AddressOffset = atoi(argv[2]);
+			printf("show address:%d\n", AddressOffset);
 			if (!DeviceIoControl(hDevice,
-		Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
-		&AddressOffset,
-		sizeof(ULONG),
-		NULL,
-		0,
-		&nOutput,
-		NULL)
-		)
-	{
-		printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
-		printf("error happens! continue? Y/N?\n");
-		while (getchar() != 'Y');
-		//		goto exit;
-		return 0;
-	}
-		if (!DeviceIoControl(hDevice,
-		Spw_PCIe_IOCTL_OUT_BUFFERED,
-		NULL,
-		0,
-		&outBuffer,
-		sizeof(ULONG),
-		&nOutput,
-		NULL)
-		)
-	{
-		printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
-		printf("error happens! continue? Y/N?\n");
-		while (getchar() != 'Y');
-		//		goto exit;
-		return 0;
-	}
-	printf("read data:%d\n", outBuffer);
-	printf("datasize:%d\n", nOutput);
+				Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
+				&AddressOffset,
+				sizeof(ULONG),
+				NULL,
+				0,
+				&nOutput,
+				NULL)
+				)
+			{
+				printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
+				printf("error happens! continue? Y/N?\n");
+				while (getchar() != 'Y');
+				//		goto exit;
+				return 0;
+			}
+			if (!DeviceIoControl(hDevice,
+				Spw_PCIe_IOCTL_OUT_BUFFERED,
+				NULL,
+				0,
+				&outBuffer,
+				sizeof(ULONG),
+				&nOutput,
+				NULL)
+				)
+			{
+				printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
+				printf("error happens! continue? Y/N?\n");
+				while (getchar() != 'Y');
+				//		goto exit;
+				return 0;
+			}
+			printf("read data:%d\n", outBuffer);
+			printf("datasize:%d\n", nOutput);
+			break;
+		case 'w':
+			printf("JeansonTest|address 0|argv:%s\n", argv[2]);
+			AddressOffset = atoi(argv[2]);
+			inBuffer = atoi(argv[3]);
+			printf("show address:%d\n", AddressOffset);
+			if (!DeviceIoControl(hDevice,
+				Spw_PCIe_IOCTL_WRITE_OFFSETADDRESS,
+				&AddressOffset,
+				sizeof(ULONG),
+				NULL,
+				0,
+				&nOutput,
+				NULL)
+				)
+			{
+				printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
+				printf("error happens! continue? Y/N?\n");
+				while (getchar() != 'Y');
+				//		goto exit;
+				return 0;
+			}
+			if (!DeviceIoControl(hDevice,
+				Spw_PCIe_IOCTL_IN_BUFFERED,
+				&inBuffer,
+				sizeof(ULONG),
+				NULL,
+				0,
+				&nOutput,
+				NULL)
+				)
+			{
+				printf("ERROR: DeviceIoControl returns %0x.", GetLastError());
+				printf("error happens! continue? Y/N?\n");
+				while (getchar() != 'Y');
+				//		goto exit;
+				return 0;
+			}
+			printf("finis write data:%d\n", inBuffer);
+			printf("datasize:%d\n", nOutput);
+				break;
+			default:
+				printf("please input : .exe  r [addressID]\n");
+				printf("please input : .exe  w [addressID] [Data]\n");
+				break;
+		}
+		//finish 
+		return 0; 
 
 	}
 #endif 
