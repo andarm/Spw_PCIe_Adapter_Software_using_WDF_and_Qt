@@ -1,0 +1,15 @@
+﻿  Building 'Pci9x5x' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+  Stamping x64\Debug\pci9x5x.inf
+  Stamping [Version] section with DriverVer=05/22/2019,0.7.18.668
+  precompsrc.c
+  Pci9656.c
+  Init.c
+  IsrDpc.c
+  Read.c
+  Write.c
+  Control.c
+  正在生成代码...
+  Pci9x5x.vcxproj -> D:\pro\WindowDriver\src\JeanTestPCIE_DMA\sys\x64\Debug\Pci9x5x.sys
+  Done Adding Additional Store
+  Successfully signed: D:\pro\WindowDriver\src\JeanTestPCIE_DMA\sys\x64\Debug\Pci9x5x.sys
+  

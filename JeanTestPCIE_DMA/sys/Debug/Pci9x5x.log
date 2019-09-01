@@ -1,0 +1,14 @@
+﻿  Building 'Pci9x5x' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(402,5): warning MSB8038: 已启用 Spectre 缓解，但找不到 Spectre 缓解库。验证 Visual Studio 工作负荷包括 Spectre 缓解库。有关详细信息，请参阅 https://aka.ms/Ofhn4c。
+  Stamping Debug\pci9x5x.inf
+  Stamping [Version] section with DriverVer=05/19/2019,13.17.11.933
+  precompsrc.c
+  Pci9656.c
+  Init.c
+d:\pro\windowdriver\src\jeantestpcie_dma\sys\init.c(849): error C2220: 警告被视为错误 - 没有生成“object”文件
+d:\pro\windowdriver\src\jeantestpcie_dma\sys\init.c(849): warning C4100: “DevExt”: 未引用的形参
+  IsrDpc.c
+  Read.c
+  Write.c
+  Control.c
+  正在生成代码...
